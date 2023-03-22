@@ -1,0 +1,15 @@
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.exe
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.deps.json
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.runtimeconfig.json
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.dll
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.pdb
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.csproj.AssemblyReference.cache
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.AssemblyInfoInputs.cache
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.AssemblyInfo.cs
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.csproj.CoreCompileInputs.cache
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.dll
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\refint\FootballTablesProject.dll
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.pdb
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.genruntimeconfig.cache
+C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\ref\FootballTablesProject.dll
