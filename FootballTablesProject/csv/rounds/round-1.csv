@@ -1,1 +1,7 @@
-home_team_abbreviated, away_team_abreviated
+home_team_abbreviated, away_team_abbreviated, score, goals_home_team, goals_away_team
+FCM, RFC, 1:1, 1, 1
+LBK, SIF, 2:2, 2, 2
+VFF, AAB, 2:1, 2, 1
+FCK, ACH, 0:1, 0, 1
+BIF, AGF, 1:0, 1, 0
+OB, FCN, 0:2, 0, 2
