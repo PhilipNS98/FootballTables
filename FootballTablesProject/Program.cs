@@ -11,11 +11,12 @@ namespace FootballTableSpace
             var leagues = new List<League>();
             var teams = new List<Team>();
 
-            initializeData(leagues, teams);         
-            print(leagues, teams);         
+            InitializeData(leagues, teams);         
+            Print(leagues, teams);         
+
         }
 
-        public static void print(List<League> leagues, List<Team> teams) {
+        public static void Print(List<League> leagues, List<Team> teams) {
             foreach(League l in leagues)
             {
                 Console.WriteLine(l.ToString());
@@ -26,13 +27,13 @@ namespace FootballTableSpace
             }
         }
 
-        public static void initializeData(List<League> leagues, List<Team> teams)
+        public static void InitializeData(List<League> leagues, List<Team> teams)
         {
-            initializeSetupCSV(leagues);
-            initializeTeamCSV(teams);
+            InitializeSetupCSV(leagues);
+            InitializeTeamCSV(teams);
         }
 
-        public static void initializeSetupCSV(List<League> leagues)
+        public static void InitializeSetupCSV(List<League> leagues)
         {
             string filePath = "./csv/setup.csv";
             using (StreamReader reader = new StreamReader(filePath))
@@ -60,7 +61,7 @@ namespace FootballTableSpace
             }
         }
 
-        public static void initializeTeamCSV(List<Team> teams)
+        public static void InitializeTeamCSV(List<Team> teams)
         {
             string filePath = "./csv/teams.csv";
             using (StreamReader reader = new StreamReader(filePath))
@@ -87,6 +88,11 @@ namespace FootballTableSpace
                     teams.Add(team);
                 }                
             }
+        }
+
+        public static void CurrentStandings(List<Team> teams)
+        {
+            
         }
     }
 

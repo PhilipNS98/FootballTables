@@ -13,3 +13,18 @@ C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Project
 C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.pdb
 C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.genruntimeconfig.cache
 C:\Users\TNP-\Documents\Skole\Skole - Datamatiker\4. Semester\C# & Unity\Projects\FootballTables\FootballTablesProject\obj\Debug\net6.0\ref\FootballTablesProject.dll
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.exe
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.deps.json
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.runtimeconfig.json
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.dll
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\bin\Debug\net6.0\FootballTablesProject.pdb
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.csproj.AssemblyReference.cache
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.AssemblyInfoInputs.cache
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.AssemblyInfo.cs
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.csproj.CoreCompileInputs.cache
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.dll
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\refint\FootballTablesProject.dll
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.pdb
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\FootballTablesProject.genruntimeconfig.cache
+C:\Users\vulpy\Documents\GitHub\FootballTables\FootballTablesProject\obj\Debug\net6.0\ref\FootballTablesProject.dll
