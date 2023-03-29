@@ -154,20 +154,34 @@ namespace FootballTableSpace
             }
 
             // print table
-            Console.WriteLine("Position\tClub Name\t\t\t\tGP\tW\tD\tL\tGF\tGA\tGD\tPoints\tStreak");
-            int position = 1;
+            System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.Console.WriteLine("┃ Pos │ Team             │    M  W  D  L  GF GA GD P  Streak ┃");
+            System.Console.WriteLine("┠─────┼──────────────────┼───────────────────────────────────┨");
             foreach (var standing in standings.OrderByDescending(s => s.Value.Points)
+            
                 .ThenByDescending(s => s.Value.GoalDifference)
                 .ThenByDescending(s => s.Value.GoalsFor)
                 .ThenBy(s => s.Value.GoalsAgainst)
-                .ThenBy(s => s.Key))
+                .ThenBy(s => s.Key)
+                .ToList())
             {
                 var team = standing.Value;
-                Console.WriteLine($"{position}\t\t{team.SpecialRanking}{team.FullClubName,-35}\t{team.GamesPlayed}\t{team.GamesWon}\t{team.GamesDrawn}\t{team.GamesLost}\t{team.GoalsFor}\t{team.GoalsAgainst}\t{team.GoalDifference}\t{team.Points}\t{team.CurrentWinningStreak}");
-                position++;
+                Console.WriteLine("┃ {0, -4}│{1, -17} │ {2, 4} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 2}      ┃", 
+                    sortedTeams.IndexOf(team) + 1,  // Position in table
+                    //team.SpecialRanking,  // Special marking in parentheses
+                    team.FullClubName,   // Full club name
+                    team.GamesPlayed,     // Games played M
+                    team.GamesWon,        // Number of games won W
+                    team.GamesDrawn,      // Number of games drawn D
+                    team.GamesLost,       // Number of games lost L
+                    team.GoalsFor,        // Goals for
+                    team.GoalsAgainst,    // Goals against
+                    team.GoalDifference,  // Goal difference
+                    team.Points,           // Points achieved
+                    team.CurrentWinningStreak    // Current winning streak
+                );
             }
-
-
+             System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         }
     }
 
