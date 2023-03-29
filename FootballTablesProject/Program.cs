@@ -10,42 +10,51 @@ namespace FootballTableSpace
             Console.WriteLine("First C# Football stats!\n");
             var leagues = new List<League>();
             var teams = new List<Team>();
+            var rounds = new List<Round>();
 
-            InitializeData(leagues, teams);         
-            Print(leagues, teams);         
-            CurrentStandings(teams);
+            initializeData(leagues, teams, rounds);
+            print(leagues, teams, rounds);
+
+            CreateTable(leagues, teams, rounds);
         }
 
-        public static void Print(List<League> leagues, List<Team> teams) {
-            foreach(League l in leagues)
+        public static void print(List<League> leagues, List<Team> teams, List<Round> rounds)
+        {
+            foreach (League l in leagues)
             {
                 Console.WriteLine(l.ToString());
             }
-            foreach(Team team in teams)
+            foreach (Team team in teams)
             {
                 Console.WriteLine(team.ToString());
             }
+            foreach (Round round in rounds)
+            {
+                Console.WriteLine(round.ToString());
+            }
         }
 
-        public static void InitializeData(List<League> leagues, List<Team> teams)
+        public static void initializeData(List<League> leagues, List<Team> teams, List<Round> rounds)
         {
-            InitializeSetupCSV(leagues);
-            InitializeTeamCSV(teams);
+            initializeSetupCSV(leagues);
+            initializeTeamCSV(teams);
+            initializeAllRoundsCSV(rounds);
         }
 
-        public static void InitializeSetupCSV(List<League> leagues)
+        public static void initializeSetupCSV(List<League> leagues)
         {
             string filePath = "./csv/setup.csv";
             using (StreamReader reader = new StreamReader(filePath))
             {
                 reader.ReadLine();
 
-                while(!reader.EndOfStream)
+                while (!reader.EndOfStream)
                 {
-                    string line = reader.ReadLine();
-                    string[] values = line.Split(',');
+                    string? line = reader.ReadLine();
+                    string[] values = line?.Split(',') ?? new string[0];
 
-                    var league = new League {
+                    var league = new League
+                    {
                         Name = values[0],
                         positions_to_champions_league_qualification = Convert.ToInt32(values[1]),
                         positions_to_europa_league_qualification = Convert.ToInt32(values[2]),
@@ -57,88 +66,108 @@ namespace FootballTableSpace
                     };
 
                     leagues.Add(league);
-                }                
+                }
             }
         }
 
-        public static void InitializeTeamCSV(List<Team> teams)
+        public static void initializeTeamCSV(List<Team> teams)
         {
             string filePath = "./csv/teams.csv";
             using (StreamReader reader = new StreamReader(filePath))
             {
                 reader.ReadLine();
 
-                while(!reader.EndOfStream)
+                while (!reader.EndOfStream)
                 {
-                    string line = reader.ReadLine();
-                    string[] values = line.Split(',');
-                    string specialRanking = "";
+                    string? line = reader.ReadLine();
+                    string[] values = line?.Split(',') ?? new string[0];
+                    string specialRankingTemp = "";
 
                     if (values.Length == 3)
                     {
-                        specialRanking = values[2].Trim();
+                        specialRankingTemp = values[2].Trim();
                     }
 
-                    var team = new Team {
-                        abbreviation = values[0],
-                        full_club_name = values[1],
-                        special_ranking = specialRanking
-                    };
-
+                    var team = new Team(values[0], values[1], specialRankingTemp);
                     teams.Add(team);
-                }                
+                }
             }
         }
 
-        public static void CurrentStandings(List<Team> teams)
+        public static void initializeAllRoundsCSV(List<Round> rounds)
         {
-            //present each club, sorted by points, goal dif, goal for, goal against, alphabetical
-            //club position in list is calculated based on above sorting
-            //if clubs share position, first should show number while others show dash
-        
-            var sortedTeams = teams.OrderByDescending(t => t.games_won*3)
-                          .ThenByDescending(t => t.goals_for-t.goals_against)
-                          .ThenByDescending(t => t.goals_for)
-                          .ThenBy(t => t.goals_against)
-                          .ThenBy(t => t.full_club_name)
-                          .ToList();
-
-            /* for (int i = 1; i < sortedTeams.Count+1; i++)
+            for (int i = 1; i <= 32; i++)
             {
-                Console.WriteLine("{0,-2} {1,-25} {2,-2} {3,-2} {4,-2} {5,-2} {6,-2} {7,-2} {8,-2}",
-                i,
-                sortedTeams[i-1].Name,
-                sortedTeams[i-1].GamesPlayed,
-                sortedTeams[i-1].GamesWon,
-                sortedTeams[i-1].GamesDrawn,
-                sortedTeams[i-1].GamesLost,
-                sortedTeams[i-1].GoalsFor,
-                sortedTeams[i-1].GoalsAgainst,
-                sortedTeams[i-1].GoalDifference,
-                sortedTeams[i-1].Points);
-            } */
-            //System.Console.WriteLine("┎─────┬──────────────────┬───────────────────────────────────┒");
-            System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-            System.Console.WriteLine("┃ Pos │ Team             │    M  W  D  L  GF GA GD P  Streak ┃");
-            System.Console.WriteLine("┠─────┼──────────────────┼───────────────────────────────────┨");
-            foreach (var team in sortedTeams)
-            {
-                Console.WriteLine("┃ {0, -4}│{1, -17} │ {2, 4} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 2}      ┃", 
-                    sortedTeams.IndexOf(team) + 1,  // Position in table
-                    //team.special_marking,  // Special marking in parentheses
-                    team.full_club_name,   // Full club name
-                    team.games_played,     // Games played M
-                    team.games_won,        // Number of games won W
-                    team.games_drawn,      // Number of games drawn D
-                    team.games_lost,       // Number of games lost L
-                    team.goals_for,        // Goals for
-                    team.goals_against,    // Goals against
-                    team.goal_difference,  // Goal difference
-                    team.points,           // Points achieved
-                    team.current_streak    // Current winning streak
-                );
+                string filePath = $"./csv/rounds/round-{i}.csv";
+                initializeRoundCSV(rounds, filePath);
             }
-            System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        }
+
+        public static void initializeRoundCSV(List<Round> rounds, string filePath)
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                reader.ReadLine();
+                while (!reader.EndOfStream)
+                {
+                    string? line = reader.ReadLine();
+                    string[] values = line?.Split(',') ?? new string[0];
+
+                    var round = new Round
+                    {
+                        homeTeamAbbreviation = values[0],
+                        awayTeamAbbreviation = values[1],
+                        score = values[2],
+                        homeTeamGoals = Convert.ToInt32(values[3]),
+                        awayTeamGoals = Convert.ToInt32(values[4]),
+                    };
+
+                    rounds.Add(round);
+                }
+            }
+        }
+
+        public static void CreateTable(List<League> leagues, List<Team> teams, List<Round> rounds)
+        {
+            Dictionary<string, Team> standings = new Dictionary<string, Team>();
+            foreach (var t in teams)
+            {
+                string? abbreviation = t.Abbreviation;
+                string? fullClubName = t.FullClubName;
+                string? specialRanking = string.IsNullOrEmpty(t.SpecialRanking) ? "" : t.SpecialRanking;
+                standings.Add(abbreviation ?? "", new Team(abbreviation ?? "", fullClubName ?? "", specialRanking ?? ""));
+            }
+
+            foreach (var round in rounds)
+            {
+                string? homeTeamAbbreviation = round.homeTeamAbbreviation;
+                string? awayTeamAbbreviation = round.awayTeamAbbreviation;
+                int homeTeamGoals = round.homeTeamGoals;
+                int awayTeamGoals = round.awayTeamGoals;
+
+                // update home team stats
+                standings[homeTeamAbbreviation.Trim()].UpdateStats(homeTeamGoals, awayTeamGoals);
+
+                // update away team stats
+                standings[awayTeamAbbreviation.Trim()].UpdateStats(awayTeamGoals, homeTeamGoals);
+
+            }
+
+            // print table
+            Console.WriteLine("Position\tClub Name\t\t\t\tGP\tW\tD\tL\tGF\tGA\tGD\tPoints\tStreak");
+            int position = 1;
+            foreach (var standing in standings.OrderByDescending(s => s.Value.Points)
+                .ThenByDescending(s => s.Value.GoalDifference)
+                .ThenByDescending(s => s.Value.GoalsFor)
+                .ThenBy(s => s.Value.GoalsAgainst)
+                .ThenBy(s => s.Key))
+            {
+                var team = standing.Value;
+                Console.WriteLine($"{position}\t\t{team.SpecialRanking}{team.FullClubName,-35}\t{team.GamesPlayed}\t{team.GamesWon}\t{team.GamesDrawn}\t{team.GamesLost}\t{team.GoalsFor}\t{team.GoalsAgainst}\t{team.GoalDifference}\t{team.Points}\t{team.CurrentWinningStreak}");
+                position++;
+            }
+
+
         }
     }
 
