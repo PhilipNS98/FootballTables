@@ -117,7 +117,8 @@ namespace FootballTableSpace
                 sortedTeams[i-1].GoalDifference,
                 sortedTeams[i-1].Points);
             } */
-            System.Console.WriteLine("┎─────┬──────────────────┬───────────────────────────────────┒");
+            //System.Console.WriteLine("┎─────┬──────────────────┬───────────────────────────────────┒");
+            System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
             System.Console.WriteLine("┃ Pos │ Team             │    M  W  D  L  GF GA GD P  Streak ┃");
             System.Console.WriteLine("┠─────┼──────────────────┼───────────────────────────────────┨");
             foreach (var team in sortedTeams)
@@ -137,7 +138,7 @@ namespace FootballTableSpace
                     team.current_streak    // Current winning streak
                 );
             }
-            System.Console.WriteLine("┖─────┴──────────────────┴───────────────────────────────────┚");
+            System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         }
     }
 
