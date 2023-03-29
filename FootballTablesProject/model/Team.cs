@@ -10,8 +10,8 @@ public class Team
     public int goals_for { get; set; }
     public int goals_against { get; set; }
     public int goal_difference { get; set; }
-    public int points_achieved { get; set; }
-    public int current_win_streak { get; set; }
+    public int points { get; set; }
+    public int current_streak { get; set; }
 
 
     public override string ToString()

@@ -13,7 +13,7 @@ namespace FootballTableSpace
 
             InitializeData(leagues, teams);         
             Print(leagues, teams);         
-
+            CurrentStandings(teams);
         }
 
         public static void Print(List<League> leagues, List<Team> teams) {
@@ -97,10 +97,44 @@ namespace FootballTableSpace
             //if clubs share position, first should show number while others show dash
         
             var sortedTeams = teams.OrderByDescending(t => t.games_won*3)
-                          .ThenByDescending(t => t.goal_difference)
+                          .ThenByDescending(t => t.goals_for-t.goals_against)
                           .ThenByDescending(t => t.goals_for)
                           .ThenBy(t => t.goals_against)
-                          .ThenBy(t => t.full_club_name);
+                          .ThenBy(t => t.full_club_name)
+                          .ToList();
+
+            /* for (int i = 1; i < sortedTeams.Count+1; i++)
+            {
+                Console.WriteLine("{0,-2} {1,-25} {2,-2} {3,-2} {4,-2} {5,-2} {6,-2} {7,-2} {8,-2}",
+                i,
+                sortedTeams[i-1].Name,
+                sortedTeams[i-1].GamesPlayed,
+                sortedTeams[i-1].GamesWon,
+                sortedTeams[i-1].GamesDrawn,
+                sortedTeams[i-1].GamesLost,
+                sortedTeams[i-1].GoalsFor,
+                sortedTeams[i-1].GoalsAgainst,
+                sortedTeams[i-1].GoalDifference,
+                sortedTeams[i-1].Points);
+            } */
+            System.Console.WriteLine("___________________________________________________");
+            foreach (var team in sortedTeams)
+            {
+                Console.WriteLine("{0, -2}. {1, -17} | {2, 2} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 2} |", 
+                    sortedTeams.IndexOf(team) + 1,  // Position in table
+                    //team.special_marking,  // Special marking in parentheses
+                    team.full_club_name,   // Full club name
+                    team.games_played,     // Games played
+                    team.games_won,        // Number of games won
+                    team.games_drawn,      // Number of games drawn
+                    team.games_lost,       // Number of games lost
+                    team.goals_for,        // Goals for
+                    team.goals_against,    // Goals against
+                    team.goal_difference,  // Goal difference
+                    team.points,           // Points achieved
+                    team.current_streak    // Current winning streak
+                );
+            }
         }
     }
 
