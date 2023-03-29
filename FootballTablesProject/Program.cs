@@ -152,7 +152,7 @@ namespace FootballTableSpace
                 standings[awayTeamAbbreviation.Trim()].UpdateStats(awayTeamGoals, homeTeamGoals);
 
             }
-
+        var position = 1;
             // print table
             System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
             System.Console.WriteLine("┃ Pos │ Team             │    M  W  D  L  GF GA GD P  Streak ┃");
@@ -162,12 +162,11 @@ namespace FootballTableSpace
                 .ThenByDescending(s => s.Value.GoalDifference)
                 .ThenByDescending(s => s.Value.GoalsFor)
                 .ThenBy(s => s.Value.GoalsAgainst)
-                .ThenBy(s => s.Key)
-                .ToList())
+                .ThenBy(s => s.Key))
             {
                 var team = standing.Value;
                 Console.WriteLine("┃ {0, -4}│{1, -17} │ {2, 4} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 2}      ┃", 
-                    sortedTeams.IndexOf(team) + 1,  // Position in table
+                    position,  // Position in table
                     //team.SpecialRanking,  // Special marking in parentheses
                     team.FullClubName,   // Full club name
                     team.GamesPlayed,     // Games played M
@@ -177,9 +176,10 @@ namespace FootballTableSpace
                     team.GoalsFor,        // Goals for
                     team.GoalsAgainst,    // Goals against
                     team.GoalDifference,  // Goal difference
-                    team.Points,           // Points achieved
+                    team.Points,          // Points achieved
                     team.CurrentWinningStreak    // Current winning streak
                 );
+                position++;
             }
              System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         }
