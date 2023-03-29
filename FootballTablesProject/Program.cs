@@ -117,17 +117,19 @@ namespace FootballTableSpace
                 sortedTeams[i-1].GoalDifference,
                 sortedTeams[i-1].Points);
             } */
-            System.Console.WriteLine("___________________________________________________");
+            System.Console.WriteLine("┎─────┬──────────────────┬───────────────────────────────────┒");
+            System.Console.WriteLine("┃ Pos │ Team             │    M  W  D  L  GF GA GD P  Streak ┃");
+            System.Console.WriteLine("┠─────┼──────────────────┼───────────────────────────────────┨");
             foreach (var team in sortedTeams)
             {
-                Console.WriteLine("{0, -2}. {1, -17} | {2, 2} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 2} |", 
+                Console.WriteLine("┃ {0, -4}│{1, -17} │ {2, 4} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 2}      ┃", 
                     sortedTeams.IndexOf(team) + 1,  // Position in table
                     //team.special_marking,  // Special marking in parentheses
                     team.full_club_name,   // Full club name
-                    team.games_played,     // Games played
-                    team.games_won,        // Number of games won
-                    team.games_drawn,      // Number of games drawn
-                    team.games_lost,       // Number of games lost
+                    team.games_played,     // Games played M
+                    team.games_won,        // Number of games won W
+                    team.games_drawn,      // Number of games drawn D
+                    team.games_lost,       // Number of games lost L
                     team.goals_for,        // Goals for
                     team.goals_against,    // Goals against
                     team.goal_difference,  // Goal difference
@@ -135,6 +137,7 @@ namespace FootballTableSpace
                     team.current_streak    // Current winning streak
                 );
             }
+            System.Console.WriteLine("┖─────┴──────────────────┴───────────────────────────────────┚");
         }
     }
 
