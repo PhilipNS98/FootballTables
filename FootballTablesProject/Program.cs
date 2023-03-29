@@ -92,7 +92,9 @@ namespace FootballTableSpace
 
         public static void CurrentStandings(List<Team> teams)
         {
-            
+            //present each club, sorted by points, goal dif, goal for, goal against, alphabetical
+            //club position in list is calculated based on above sorting
+            //if team share position, first should show number while others show dash
         }
     }
 
