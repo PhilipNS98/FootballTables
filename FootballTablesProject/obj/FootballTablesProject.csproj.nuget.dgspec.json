@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vulpy\\Documents\\GitHub\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj": {}
+    "C:\\Users\\TNP-\\Documents\\Skole\\Skole - Datamatiker\\4. Semester\\C# & Unity\\Projects\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vulpy\\Documents\\GitHub\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj": {
+    "C:\\Users\\TNP-\\Documents\\Skole\\Skole - Datamatiker\\4. Semester\\C# & Unity\\Projects\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vulpy\\Documents\\GitHub\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj",
+        "projectUniqueName": "C:\\Users\\TNP-\\Documents\\Skole\\Skole - Datamatiker\\4. Semester\\C# & Unity\\Projects\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj",
         "projectName": "FootballTablesProject",
-        "projectPath": "C:\\Users\\vulpy\\Documents\\GitHub\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj",
-        "packagesPath": "C:\\Users\\vulpy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vulpy\\Documents\\GitHub\\FootballTables\\FootballTablesProject\\obj\\",
+        "projectPath": "C:\\Users\\TNP-\\Documents\\Skole\\Skole - Datamatiker\\4. Semester\\C# & Unity\\Projects\\FootballTables\\FootballTablesProject\\FootballTablesProject.csproj",
+        "packagesPath": "C:\\Users\\TNP-\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\TNP-\\Documents\\Skole\\Skole - Datamatiker\\4. Semester\\C# & Unity\\Projects\\FootballTables\\FootballTablesProject\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\vulpy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\TNP-\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
