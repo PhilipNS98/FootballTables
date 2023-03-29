@@ -94,7 +94,13 @@ namespace FootballTableSpace
         {
             //present each club, sorted by points, goal dif, goal for, goal against, alphabetical
             //club position in list is calculated based on above sorting
-            //if team share position, first should show number while others show dash
+            //if clubs share position, first should show number while others show dash
+        
+            var sortedTeams = teams.OrderByDescending(t => t.games_won*3)
+                          .ThenByDescending(t => t.goal_difference)
+                          .ThenByDescending(t => t.goals_for)
+                          .ThenBy(t => t.goals_against)
+                          .ThenBy(t => t.full_club_name);
         }
     }
 
