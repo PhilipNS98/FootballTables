@@ -152,7 +152,7 @@ namespace FootballTableSpace
                 standings[awayTeamAbbreviation.Trim()].UpdateStats(awayTeamGoals, homeTeamGoals);
 
             }
-        var position = 1;
+            var position = 1;
             // print table
             System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
             System.Console.WriteLine("┃ Pos │ Team             │    M  W  D  L  GF GA GD P  Streak ┃");
@@ -165,7 +165,7 @@ namespace FootballTableSpace
                 .ThenBy(s => s.Key))
             {
                 var team = standing.Value;
-                Console.WriteLine("┃ {0, -4}│{1, -17} │ {2, 4} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 2}      ┃", 
+                Console.WriteLine("┃ {0, -4}│{1, -17} │ {2, 4} {3, 2} {4, 2} {5, 2} {6, 2} {7, 2} {8, 2} {9, 2} {10, 6}  ┃", 
                     position,  // Position in table
                     //team.SpecialRanking,  // Special marking in parentheses
                     team.FullClubName,   // Full club name
@@ -181,7 +181,59 @@ namespace FootballTableSpace
                 );
                 position++;
             }
-             System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+            System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+            // NEW
+            System.Console.WriteLine("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ NEW ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            var pos = 1;
+            System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.Console.WriteLine("┃ Pos │ Team             │    M    W    D    L   GF   GA   GD    P   Streak     ┃");
+            System.Console.WriteLine("┠─────┼──────────────────┼──────────────────────────────────────────────────────┨");
+            foreach (var standing in standings.OrderByDescending(s => s.Value.Points)
+                .ThenByDescending(s => s.Value.GoalDifference)
+                .ThenByDescending(s => s.Value.GoalsFor)
+                .ThenBy(s => s.Value.GoalsAgainst)
+                .ThenBy(s => s.Key))
+            {
+                var team = standing.Value;
+                Console.Write("┃ {0, -4}│{1, -17} │ {2, 4} {3, 4} {4, 4} {5, 4} {6, 4} {7, 4} {8, 4} {9, 4}  ", 
+                    pos,                    // Position in table
+                    //team.SpecialRanking,  // Special marking in parentheses
+                    team.FullClubName,      // Full club name
+                    team.GamesPlayed,       // Games played "M"
+                    team.GamesWon,          // Number of games won "W"
+                    team.GamesDrawn,        // Number of games drawn "D"
+                    team.GamesLost,         // Number of games lost "L"
+                    team.GoalsFor,          // Goals for "GF"
+                    team.GoalsAgainst,      // Goals against "GA"
+                    team.GoalDifference,    // Goal difference "P"
+                    team.Points             // Points achieved "Streak"
+                );
+
+                // Get the last 5 games from the CurrentWinningStreak list
+                var lastFiveGames = team.CurrentWinningStreak.TakeLast(5);
+                // Loop through the last 5 games and add the colored text
+                foreach (var game in lastFiveGames)
+                {
+                    if (game == 'W')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (game == 'D')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+                    else if (game == 'L')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    Console.Write(game + " ");
+                }
+                Console.ResetColor();       // reset color to default
+                Console.WriteLine("  ┃");   // finish the table row
+                pos++;
+            }
+            System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         }
     }
 
