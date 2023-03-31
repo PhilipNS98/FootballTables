@@ -412,3 +412,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp
+FootballTablesProject/obj/Debug/net6.0/ref/FootballTablesProject.dll
+FootballTablesProject/obj/Debug/net6.0/refint/FootballTablesProject.dll

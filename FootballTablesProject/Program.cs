@@ -169,6 +169,8 @@ namespace FootballTableSpace
 
             }
             var pos = 1;
+            // Changed to worked with nice format of "━" only need to be outcomment onch for the run time to recognize the setting
+            // Console.OutputEncoding = System.Text.Encoding.UTF8; 
             System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
             System.Console.WriteLine("┃ Pos │ Team             │    M    W    D    L   GF   GA   GD    P   Streak     ┃");
             System.Console.WriteLine("┠─────┼──────────────────┼──────────────────────────────────────────────────────┨");
