@@ -14,28 +14,12 @@ namespace FootballTableSpace
 
             initializeData(leagues, teams, rounds);
             //print(leagues, teams, rounds);
-            print(leagues);
+            /* print(leagues);
             print(teams);
-            print(rounds);
+            print(rounds); */
 
             CreateTable(leagues, teams, rounds);
         }
-
-        /* public static void print(List<League> leagues, List<Team> teams, List<Round> rounds)
-        {
-            foreach (League l in leagues)
-            {
-                Console.WriteLine(l.ToString());
-            }
-            foreach (Team team in teams)
-            {
-                Console.WriteLine(team.ToString());
-            }
-            foreach (Round round in rounds)
-            {
-                Console.WriteLine(round.ToString());
-            }
-        } */
 
         // Print method using generics to allow multiple data types.
         public static void print<T>(List<T> items)
@@ -93,16 +77,9 @@ namespace FootballTableSpace
                 {
                     string? line = reader.ReadLine();
                     string[] values = line?.Split(',') ?? new string[0];
-                    /* string specialRankingTemp = "";
-
-                    if (values.Length == 3)
-                    {
-                        specialRankingTemp = values[2].Trim();
-                    } */
 
                     //Pattern matching, using is operator, changed if expression to is statement
                     string specialRankingTemp = values.Length == 3 && values[2].Trim() is string sr ? sr : "";
-
 
                     var team = new Team(values[0], values[1], specialRankingTemp);
                     teams.Add(team);
@@ -145,7 +122,36 @@ namespace FootballTableSpace
 
         public static void CreateTable(List<League> leagues, List<Team> teams, List<Round> rounds)
         {
+            // Changed to worked with nice format of "━".
+            Console.OutputEncoding = System.Text.Encoding.UTF8; 
+            Dictionary<string, Team> standings = TableForPreliminaries(leagues, teams, rounds);
+
+            System.Console.WriteLine();
+            ChampionShipPlayoff(standings, leagues, teams, rounds);
+
+            System.Console.WriteLine();
+            RelegationPlayoff(standings, leagues, teams, rounds);
+        }
+
+        public static void TableStart(string title)
+        {
+            System.Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.Console.WriteLine("┃                              {0, 20}                                 ┃",
+                title);
+            System.Console.WriteLine("┣━━━━━┯━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫");
+            System.Console.WriteLine("┃ Pos │ Team                 │    M    W    D    L   GF   GA   GD    P   Streak     ┃");
+            System.Console.WriteLine("┠─────┼──────────────────────┼──────────────────────────────────────────────────────┨");
+        }
+
+        public static void TableEnd()
+        {
+            System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+        }
+
+        public static Dictionary<string, Team> TableForPreliminaries(List<League> leagues, List<Team> teams, List<Round> rounds)
+        {
             Dictionary<string, Team> standings = new Dictionary<string, Team>();
+            TableStart(" Preliminary Rounds ");
             foreach (var t in teams)
             {
                 string? abbreviation = t.Abbreviation;
@@ -153,8 +159,8 @@ namespace FootballTableSpace
                 string? specialRanking = string.IsNullOrEmpty(t.SpecialRanking) ? "" : t.SpecialRanking;
                 standings.Add(abbreviation ?? "", new Team(abbreviation ?? "", fullClubName ?? "", specialRanking ?? ""));
             }
-
-            foreach (var round in rounds)
+            var first22Rounds = rounds.Take(132);
+            foreach (var round in first22Rounds)
             {
                 string? homeTeamAbbreviation = round.homeTeamAbbreviation;
                 string? awayTeamAbbreviation = round.awayTeamAbbreviation;
@@ -166,14 +172,8 @@ namespace FootballTableSpace
 
                 // update away team stats
                 standings[awayTeamAbbreviation.Trim()].UpdateStats(awayTeamGoals, homeTeamGoals);
-
             }
             var pos = 1;
-            // Changed to worked with nice format of "━" only need to be outcomment onch for the run time to recognize the setting
-            // Console.OutputEncoding = System.Text.Encoding.UTF8; 
-            System.Console.WriteLine("┏━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-            System.Console.WriteLine("┃ Pos │ Team             │    M    W    D    L   GF   GA   GD    P   Streak     ┃");
-            System.Console.WriteLine("┠─────┼──────────────────┼──────────────────────────────────────────────────────┨");
             foreach (var standing in standings.OrderByDescending(s => s.Value.Points)
                 .ThenByDescending(s => s.Value.GoalDifference)
                 .ThenByDescending(s => s.Value.GoalsFor)
@@ -181,18 +181,27 @@ namespace FootballTableSpace
                 .ThenBy(s => s.Key))
             {
                 var team = standing.Value;
-                Console.Write("┃ {0, -4}│{1, -17} │ {2, 4} {3, 4} {4, 4} {5, 4} {6, 4} {7, 4} {8, 4} {9, 4}  ", 
-                    pos,                    // Position in table
-                    //team.SpecialRanking,  // Special marking in parentheses
-                    team.FullClubName,      // Full club name
-                    team.GamesPlayed,       // Games played "M"
-                    team.GamesWon,          // Number of games won "W"
-                    team.GamesDrawn,        // Number of games drawn "D"
-                    team.GamesLost,         // Number of games lost "L"
-                    team.GoalsFor,          // Goals for "GF"
-                    team.GoalsAgainst,      // Goals against "GA"
-                    team.GoalDifference,    // Goal difference "P"
-                    team.Points             // Points achieved "Streak"
+
+                Console.Write("┃ ");
+                Console.ForegroundColor = pos switch
+                {
+                    1 or 2 or 3 or 4 or 5 or 6 => ConsoleColor.Green,
+                    7 or 8 or 9 or 10 or 11 or 12 => ConsoleColor.Red,
+                    _ => Console.ForegroundColor // set default color if game is null or unknown
+                };
+                Console.Write("{0, -4}", pos);
+                Console.ResetColor(); 
+                var specialRanking = team.SpecialRanking.Length != 0 ? $" ({team.SpecialRanking})" : "";
+                Console.Write("│{0, -21} │ {1, 4} {2, 4} {3, 4} {4, 4} {5, 4} {6, 4} {7, 4} {8, 4}  ", 
+                    team.FullClubName + specialRanking,     // Full club name
+                    team.GamesPlayed,                       // Games played "M"
+                    team.GamesWon,                          // Number of games won "W"
+                    team.GamesDrawn,                        // Number of games drawn "D"
+                    team.GamesLost,                         // Number of games lost "L"
+                    team.GoalsFor,                          // Goals for "GF"
+                    team.GoalsAgainst,                      // Goals against "GA"
+                    team.GoalDifference,                    // Goal difference "P"
+                    team.Points                             // Points achieved "Streak"
                 );
 
                 // Get the last 5 games from the CurrentWinningStreak list
@@ -215,7 +224,150 @@ namespace FootballTableSpace
                 Console.WriteLine("  ┃");   // finish the table row
                 pos++;
             }
-            System.Console.WriteLine("┗━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+            TableEnd();
+            return standings;
+        }
+
+
+
+        public static void ChampionShipPlayoff(Dictionary<string, Team> standings, List<League> leagues, List<Team> teams, List<Round> rounds)
+        {
+            var standingsChampionShipPlayoff = standings.Take(6);
+            var last10Games = rounds.TakeLast(60);
+            foreach (var round in last10Games)
+            {
+                string? homeTeamAbbreviation = round.homeTeamAbbreviation;
+                string? awayTeamAbbreviation = round.awayTeamAbbreviation;
+                int homeTeamGoals = round.homeTeamGoals;
+                int awayTeamGoals = round.awayTeamGoals;
+
+                // update home team stats
+                standings[homeTeamAbbreviation.Trim()].UpdateStats(homeTeamGoals, awayTeamGoals);
+
+                // update away team stats
+                standings[awayTeamAbbreviation.Trim()].UpdateStats(awayTeamGoals, homeTeamGoals);
+            }
+            var pos = 1;
+            TableStart("Championship Playoff");
+            foreach (var standing in standingsChampionShipPlayoff.OrderByDescending(s => s.Value.Points)
+                .ThenByDescending(s => s.Value.GoalDifference)
+                .ThenByDescending(s => s.Value.GoalsFor)
+                .ThenBy(s => s.Value.GoalsAgainst)
+                .ThenBy(s => s.Key))
+            {
+                var team = standing.Value;
+                Console.Write("┃ ");
+                Console.ForegroundColor = pos switch
+                {
+                    1 => ConsoleColor.Yellow,
+                    2 or 3 => ConsoleColor.Magenta,
+                    _ => Console.ForegroundColor // set default color if game is null or unknown
+                };
+                Console.Write("{0, -4}", pos);
+                Console.ResetColor(); 
+                var specialRanking = team.SpecialRanking.Length != 0 ? $" ({team.SpecialRanking})" : "";
+                Console.Write("│{0, -21} │ {1, 4} {2, 4} {3, 4} {4, 4} {5, 4} {6, 4} {7, 4} {8, 4}  ", 
+                    team.FullClubName + specialRanking,     // Full club name
+                    team.GamesPlayed,                       // Games played "M"
+                    team.GamesWon,                          // Number of games won "W"
+                    team.GamesDrawn,                        // Number of games drawn "D"
+                    team.GamesLost,                         // Number of games lost "L"
+                    team.GoalsFor,                          // Goals for "GF"
+                    team.GoalsAgainst,                      // Goals against "GA"
+                    team.GoalDifference,                    // Goal difference "P"
+                    team.Points                             // Points achieved "Streak"
+                );
+
+                // Get the last 5 games from the CurrentWinningStreak list
+                var lastFiveGames = team.CurrentWinningStreak.TakeLast(5);
+                // Loop through the last 5 games and add the colored text
+                foreach (var game in lastFiveGames)
+                {
+                    Console.ForegroundColor = game switch
+                    {
+                        'W' => ConsoleColor.Green,
+                        'D' => ConsoleColor.Yellow,
+                        'L' => ConsoleColor.Red,
+                        _ => Console.ForegroundColor // set default color if game is null or unknown
+                    };
+
+                    Console.Write(game + " ");
+                }
+                Console.ResetColor();       // reset color to default
+                Console.WriteLine("  ┃");   // finish the table row
+                pos++;
+            } 
+            TableEnd();
+        }
+
+        public static void RelegationPlayoff(Dictionary<string, Team> standings, List<League> leagues, List<Team> teams, List<Round> rounds)
+        {
+            var standingsRelegationPlayoff = standings.TakeLast(6);
+            var last10Games = rounds.TakeLast(60);
+            foreach (var round in last10Games)
+            {
+                string? homeTeamAbbreviation = round.homeTeamAbbreviation;
+                string? awayTeamAbbreviation = round.awayTeamAbbreviation;
+                int homeTeamGoals = round.homeTeamGoals;
+                int awayTeamGoals = round.awayTeamGoals;
+
+                // update home team stats
+                standings[homeTeamAbbreviation.Trim()].UpdateStats(homeTeamGoals, awayTeamGoals);
+
+                // update away team stats
+                standings[awayTeamAbbreviation.Trim()].UpdateStats(awayTeamGoals, homeTeamGoals);
+            }
+            var pos = 7;
+            
+            TableStart(" Relegation Playoff ");
+            foreach (var standing in standingsRelegationPlayoff.OrderByDescending(s => s.Value.Points)
+                .ThenByDescending(s => s.Value.GoalDifference)
+                .ThenByDescending(s => s.Value.GoalsFor)
+                .ThenBy(s => s.Value.GoalsAgainst)
+                .ThenBy(s => s.Key))
+            {
+                var team = standing.Value;
+                Console.Write("┃ ");
+                Console.ForegroundColor = pos switch
+                {
+                    11 or 12 => ConsoleColor.Red,
+                    _ => Console.ForegroundColor // set default color if game is null or unknown
+                };
+                Console.Write("{0, -4}", pos);
+                Console.ResetColor(); 
+                var specialRanking = team.SpecialRanking.Length != 0 ? $" ({team.SpecialRanking})" : "";
+                Console.Write("│{0, -21} │ {1, 4} {2, 4} {3, 4} {4, 4} {5, 4} {6, 4} {7, 4} {8, 4}  ", 
+                    team.FullClubName + specialRanking,     // Full club name
+                    team.GamesPlayed,                       // Games played "M"
+                    team.GamesWon,                          // Number of games won "W"
+                    team.GamesDrawn,                        // Number of games drawn "D"
+                    team.GamesLost,                         // Number of games lost "L"
+                    team.GoalsFor,                          // Goals for "GF"
+                    team.GoalsAgainst,                      // Goals against "GA"
+                    team.GoalDifference,                    // Goal difference "P"
+                    team.Points                             // Points achieved "Streak"
+                );
+
+                // Get the last 5 games from the CurrentWinningStreak list
+                var lastFiveGames = team.CurrentWinningStreak.TakeLast(5);
+                // Loop through the last 5 games and add the colored text
+                foreach (var game in lastFiveGames)
+                {
+                    Console.ForegroundColor = game switch
+                    {
+                        'W' => ConsoleColor.Green,
+                        'D' => ConsoleColor.Yellow,
+                        'L' => ConsoleColor.Red,
+                        _ => Console.ForegroundColor // set default color if game is null or unknown
+                    };
+
+                    Console.Write(game + " ");
+                }
+                Console.ResetColor();       // reset color to default
+                Console.WriteLine("  ┃");   // finish the table row
+                pos++;
+            } 
+            TableEnd();
         }
     }
 
