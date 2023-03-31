@@ -48,8 +48,13 @@ public class Team
     }
 public override string ToString()
     {
+        // The null-coalescing operator '??' is used to provide a default value if Abbreviation & FullClubName are null or empty
+        string abbreviation = Abbreviation ?? "Unknown";
+        string fullClubName = FullClubName ?? "Unknown";
+
         if (string.IsNullOrEmpty(SpecialRanking))
         {
+            // String interpolation by using $ before the string, and inserting expressions (Abbreviation & FullClubName) into the string encapsulated with {}
             return $"Team: {Abbreviation}, {FullClubName}";
         }
         else

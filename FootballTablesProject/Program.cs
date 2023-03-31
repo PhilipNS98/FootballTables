@@ -13,12 +13,15 @@ namespace FootballTableSpace
             var rounds = new List<Round>();
 
             initializeData(leagues, teams, rounds);
-            print(leagues, teams, rounds);
+            //print(leagues, teams, rounds);
+            print(leagues);
+            print(teams);
+            print(rounds);
 
             CreateTable(leagues, teams, rounds);
         }
 
-        public static void print(List<League> leagues, List<Team> teams, List<Round> rounds)
+        /* public static void print(List<League> leagues, List<Team> teams, List<Round> rounds)
         {
             foreach (League l in leagues)
             {
@@ -31,6 +34,15 @@ namespace FootballTableSpace
             foreach (Round round in rounds)
             {
                 Console.WriteLine(round.ToString());
+            }
+        } */
+
+        // Print method using generics to allow multiple data types.
+        public static void print<T>(List<T> items)
+        {
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.ToString());
             }
         }
 
@@ -81,12 +93,16 @@ namespace FootballTableSpace
                 {
                     string? line = reader.ReadLine();
                     string[] values = line?.Split(',') ?? new string[0];
-                    string specialRankingTemp = "";
+                    /* string specialRankingTemp = "";
 
                     if (values.Length == 3)
                     {
                         specialRankingTemp = values[2].Trim();
-                    }
+                    } */
+
+                    //Pattern matching, using is operator, changed if expression to is statement
+                    string specialRankingTemp = values.Length == 3 && values[2].Trim() is string sr ? sr : "";
+
 
                     var team = new Team(values[0], values[1], specialRankingTemp);
                     teams.Add(team);
@@ -180,20 +196,17 @@ namespace FootballTableSpace
                 // Get the last 5 games from the CurrentWinningStreak list
                 var lastFiveGames = team.CurrentWinningStreak.TakeLast(5);
                 // Loop through the last 5 games and add the colored text
+                //
                 foreach (var game in lastFiveGames)
                 {
-                    if (game == 'W')
+                    Console.ForegroundColor = game switch
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                    }
-                    else if (game == 'D')
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                    }
-                    else if (game == 'L')
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
+                        'W' => ConsoleColor.Green,
+                        'D' => ConsoleColor.Yellow,
+                        'L' => ConsoleColor.Red,
+                        _ => Console.ForegroundColor // set default color if game is null or unknown
+                    };
+
                     Console.Write(game + " ");
                 }
                 Console.ResetColor();       // reset color to default
