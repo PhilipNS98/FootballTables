@@ -1,0 +1,59 @@
+Question:
+why does the console print out question marks when System.Console.WriteLine(""); 
+special characters, f.eks when creating a table in the terminal?
+
+Answer: 
+The console is likely unable to display the special characters due to encoding issues. 
+The console's encoding might not support the characters you are trying to print, 
+so it replaces them with question marks.
+
+You can try changing the console's encoding to support the special characters 
+by using the Console.OutputEncoding property. For example, to use the UTF-8 encoding, 
+you can add the following code at the start of your program:
+
+Console.OutputEncoding = Encoding.UTF8;
+
+This should allow the console to display special characters correctly.
+
+
+Question: 
+is there not a easier and less tedious way to make null checks in C# ?
+
+Answer:
+Yes, C# provides a simpler way to check for null values using the null-conditional 
+operator (?.) and the null-coalescing operator (??).
+
+The null-conditional operator allows you to check for null before accessing
+a property or calling a method. For example, instead of writing:
+
+if (person != null && person.Address != null)
+{
+    var city = person.Address.City;
+}
+
+You can use the null-conditional operator to simplify it:
+
+var city = person?.Address?.City;
+
+This will automatically return null if either person or Address is null, 
+without throwing a NullReferenceException.
+
+The null-coalescing operator is used to provide a default value when a 
+nullable value is null. For example:
+
+string name = null;
+string defaultName = "John";
+var result = name ?? defaultName;
+
+In this example, the result variable will be set to "John", because name is null.
+
+These operators make it easier and less error-prone to work with null values in C#.
+
+
+
+
+
+
+
+
+

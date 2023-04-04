@@ -1,0 +1,15 @@
+Question Part 1:
+C# i have got i problem with System.Console.WriteLine() that i didn't get before now i get "?" insted of "━".
+
+Answer:
+This could be because the console font being used doesn't have the character "━" available. You could try changing the console font to a font that supports this character.
+You can change the font of the console by right-clicking on the console window, selecting "Properties", going to the "Font" tab, and selecting a different font.
+Alternatively, you can try using a different character that is supported by the current console font, such as a hyphen (-) or an equal sign (=), instead of the character "━".
+
+Question Part 2:
+but i worked fine yesterday.
+
+Answer:
+It's possible that the encoding settings of your console have changed, which could cause certain characters to be displayed differently or not at all. You can try resetting the encoding settings of the console to the default by adding the following line of code at the beginning of your program:
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+This sets the output encoding of the console to UTF-8, which should allow you to display special characters like "━" properly.
