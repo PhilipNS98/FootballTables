@@ -128,9 +128,10 @@ namespace FootballTableSpace
 
             System.Console.WriteLine();
             ChampionShipPlayoff(standings, leagues, teams, rounds);
-
+            
             System.Console.WriteLine();
             RelegationPlayoff(standings, leagues, teams, rounds);
+
         }
 
         public static void TableStart(string title)
@@ -303,7 +304,9 @@ namespace FootballTableSpace
         public static void RelegationPlayoff(Dictionary<string, Team> standings, List<League> leagues, List<Team> teams, List<Round> rounds)
         {
             var standingsRelegationPlayoff = standings.TakeLast(6);
-            var last10Games = rounds.TakeLast(60);
+
+            //Don't need this since the last 10 rounds gets updated in ChampionshipPlayoff
+          /*   var last10Games = rounds.TakeLast(60);
             foreach (var round in last10Games)
             {
                 string? homeTeamAbbreviation = round.homeTeamAbbreviation;
@@ -316,7 +319,7 @@ namespace FootballTableSpace
 
                 // update away team stats
                 standings[awayTeamAbbreviation.Trim()].UpdateStats(awayTeamGoals, homeTeamGoals);
-            }
+            } */
             var pos = 7;
             
             TableStart(" Relegation Playoff ");
