@@ -1,5 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 public class Team
 {
+    [StringLength(3, ErrorMessage = "Abbreviation must be no more than 3 characters long.")]
     public string? Abbreviation { get; set; }
     public string? FullClubName { get; set; }
     public string? SpecialRanking { get; set; }

@@ -1,41 +1,41 @@
-#Type system
+# Type system
 Example
 
-#Null handling
-Example
-Team.cs - ToString()
-
-#String interpolation
+# Null handling
 Example
 Team.cs - ToString()
 
-#Pattern Matching
+# String interpolation
+Example
+Team.cs - ToString()
+
+# Pattern Matching
 Example
 
-#Classes, structs and enums
+# Classes, structs and enums
 Example
 
-#Properties
+# Properties
 Example
 
-#Named & optional parameters
+# Named & optional parameters
 Example
 
-#Tuples, deconstruction
+# Tuples, deconstruction
+Example
+League.cs - (string?, int, int, int, int, int, int, int) GetLeagueInfo()
+# Exception
 Example
 
-#Exception
+# Attributes and DataValidation
+Example
+Team.cs - public string? Abbreviation { get; set; }
+# Arrays / Collections
 Example
 
-#Attributes and DataValidation
+# Ranges
 Example
 
-#Arrays / Collections
-Example
-
-#Ranges
-Example
-
-#Generics
+# Generics
 Example
 Program.cs - Print<T>()

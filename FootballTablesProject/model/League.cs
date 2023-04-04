@@ -11,6 +11,7 @@ public class League
 
     public (string?, int, int, int, int, int, int, int) GetLeagueInfo()
     {
+        //return items as a tuple
         return (
             Name, 
             positions_to_champions_league_qualification,
