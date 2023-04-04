@@ -16,7 +16,7 @@ The Football Tables Project consists of the following components:
 - **League.cs:** This class defines the attributes and methods for the league, including the generation of the league table.
 - **Program.cs:** This class is the entry point for the console application, which prompts the user for file paths and generates the league table.
 
-# **Rule/Error Help Information**
+## **Rule/Error Help Information**
 
 The Football Tables Project follows the following rules and error handling:
 
